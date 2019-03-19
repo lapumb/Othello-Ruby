@@ -137,8 +137,14 @@ class Othello
 	def isValidMoveAvailableForDisc(disc)
     #
     # TO DO: add your code below
-    #
-
+		#
+		for i in (0...@board.size)
+			for j in (0...@board.size)
+				if isValidMoveForDisc(i, j, disc)
+					return true
+				end
+			end
+		end
 
     # DO NOT DELETE THE LINE BELOW
 		return false;
