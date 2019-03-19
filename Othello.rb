@@ -148,8 +148,14 @@ class Othello
 	def isBoardFull()
     #
     # TO DO: add your code below
-    #
-
+		#
+		for i in (0...@board.size)
+			for j in (0...@board.size)
+				if @board[i][j] == EMPTY
+					return false
+				end
+			end
+		end
 
     # DO NOT DELETE THE LINE BELOW
 		return true;
@@ -172,7 +178,16 @@ class Othello
     #
     # TO DO: add your code below
     #
-
+		for i in (0...@board.size)
+			for j in (0...@board.size)
+				if board[i][j] == WHITE
+					whiteCount++
+				end
+				if board[i][j] == BLACK
+					blackCount++
+				end
+			end
+		end
 
 
     # DO NOT DELETE THE CODE BELOW
