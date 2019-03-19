@@ -1,6 +1,6 @@
 #
 # Othello Game Class
-# Author(s): Nandigam, 
+# Author(s): Nandigam, Blake Lapum, Cole Sellers
 #
 
 class Othello
@@ -58,7 +58,18 @@ class Othello
   def initializeBoard()
     #
     # TO DO: complete this method
-    #
+		#
+		for i in (0...@board.length)
+			for j in (0...@board.length)
+				@board[i][j] = EMPTY
+			end
+		end
+
+		@board[@size/2][@size/2] = BLACK
+		@board[@size/2 - 1][@size/2 - 1] = BLACK
+		@board[@size/2 - 1][@size/2] = WHITE
+		@board[@size/2][@size/2 - 1] = WHITE
+
   end
 
   # Returns true if placing the disc of current player at row,col is valid;
@@ -76,7 +87,8 @@ class Othello
 
     #
     # TO DO: add your code below
-    #
+		#
+		
 
 
     # DO NOT DELETE THE LINE BELOW
