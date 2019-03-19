@@ -180,11 +180,11 @@ class Othello
     #
 		for i in (0...@board.size)
 			for j in (0...@board.size)
-				if board[i][j] == WHITE
-					whiteCount++
+				if @board[i][j] == WHITE
+					whiteCount = whiteCount + 1
 				end
-				if board[i][j] == BLACK
-					blackCount++
+				if @board[i][j] == BLACK
+					blackCount = blackCount + 1
 				end
 			end
 		end
