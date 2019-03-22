@@ -86,10 +86,37 @@ class Othello
 		end
 
     #
-    # TO DO: add your code below
+		# TO DO: add your code below
 		#
-		
+		#flips any opponent discs down
+		r = row + 1
+		c = col
+		while r < @size && @board[r][c] != EMPTY && @board[r][c] != disc do
+			r += 1
+		end
 
+		if(r < @size && @board[r][c] == disc)
+			for i in (0...r)
+				if @board[r+1][c] == disc
+					return true
+				end
+			end
+		end
+		
+		#Up
+		r = row - 1
+		c = col
+		while r >= 0 && @board[r][c] != EMPTY && @board[r][c] != disc do
+			r -= 1
+		end
+
+		if(r >= 0 && @board[r][c] == @disc)
+			for i in (0...r)
+				if @board[r-1][c] == disc
+					return true
+				end
+			end
+		end
 
     # DO NOT DELETE THE LINE BELOW
 		return false	# if control reaches this point, then it's not a valid move
