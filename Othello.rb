@@ -170,7 +170,7 @@ class Othello
     #
     # TO DO: add your code below
 		#
-		
+		@board[row][col] = @disc;
 		# flips any opponent discs down
 		r = row + 1
 		c = col
