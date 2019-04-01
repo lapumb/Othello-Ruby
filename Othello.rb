@@ -56,9 +56,6 @@ class Othello
 
   # Initializes the board with start configuration of discs
   def initializeBoard()
-    #
-    # TO DO: complete this method
-		#
 		for i in (0...@board.length)
 			for j in (0...@board.length)
 				@board[i][j] = EMPTY
@@ -85,38 +82,158 @@ class Othello
 			return false
 		end
 
-    #
-		# TO DO: add your code below
-		#
-		#flips any opponent discs down
+		#Flips them down
 		r = row + 1
 		c = col
-		while r < @size && @board[r][c] != EMPTY && @board[r][c] != disc do
+		while r < @size && @board[r][c] != EMPTY && @board[r][c] != disc do 
 			r += 1
 		end
 
 		if(r < @size && @board[r][c] == disc)
-			for i in (0...r)
-				if @board[r+1][c] == disc
-					return true
+			i = row + 1
+			while i < r 
+				if(@board[i+1][col] == disc)
+					return true;
 				end
+				i += 1
 			end
 		end
-		
-		#Up
+
+		# Flips pieces up 
 		r = row - 1
 		c = col
-		while r >= 0 && @board[r][c] != EMPTY && @board[r][c] != disc do
+
+		while r >= 0 && @board[r][c] != EMPTY && @board[r][c] != disc do 
 			r -= 1
 		end
 
-		if(r >= 0 && @board[r][c] == @disc)
-			for i in (0...r)
-				if @board[r-1][c] == disc
+		if r >= 0 && @board[r][c] == disc 
+			i = row - 1
+			while i > r
+				if(@board[i-1][col] == disc)
 					return true
 				end
+				i -= 1
 			end
 		end
+
+		# flips any opponent discs right
+		r = row
+		c = col + 1
+		while c < @size && @board[r][c] != EMPTY && @board[r][c] != disc do
+				c += 1
+		end
+
+		if c < @size && @board[r][c] == disc
+			j = col + 1
+			while j < c
+				if(@board[row][j+1] == disc) 
+						return true
+				end
+				j += 1
+			end
+		end
+
+
+		# flips any opponent discs left
+		r = row
+		c = col - 1
+
+		while c >= 0 && @board[r][c] != EMPTY && @board[r][c] != disc do 
+				c -= 1
+		end
+
+		if (c >= 0 && @board[r][c] == disc) 
+			j = col - 1
+			while j > c
+				if(@board[row][j-1] == disc) 
+						return true
+				end
+				j -= 1
+			end
+		end
+
+
+		# flips any opponent discs diagonal up right
+		r = row - 1
+		c = col + 1
+
+		while r >= 0 && c < @size && @board[r][c] != EMPTY && @board[r][c] != disc do 
+				r -= 1
+				c += 1
+		end
+ 
+		if r >= 0 && c < @size && @board[r][c] == disc 
+			i = row - 1
+			j = col + 1
+			while i > r && j < c
+				if(@board[i-1][j+1] == disc) 
+						return true; 
+				end
+				i -= 1
+				j += 1
+			end
+		end 
+
+		# flips any opponent discs diagonal up left
+		r = row - 1
+		c = col - 1
+		while r >= 0 && c >= 0 && @board[r][c] != EMPTY && @board[r][c] != disc do
+				r -= 1
+				c -= 1
+		end 
+
+		if r >= 0 && c >= 0 && @board[r][c] == disc
+			i = row - 1
+			j = col - 1
+			while i > r && j > c
+				if @board[i-1][j-1] == disc 
+					return true 
+				end
+				i -= 1
+				j -= 1
+			end 
+		end 
+
+			# flips any opponent discs diagonal down left (southwest)
+			r = row + 1
+			c = col - 1
+			while r < @size && c >= 0 && @board[r][c] != EMPTY && @board[r][c] != disc do 
+					r += 1
+					c -= 1
+			end
+
+			if r < @size && c >= 0 && @board[r][c] == disc
+				i = row + 1
+				j = col - 1
+				while i < r && j > c 
+					if @board[i+1][j-1] == disc
+							return true
+					end 
+					i += 1
+					j -= 1
+				end 
+			end 
+
+			# flips any opponent discs diagonal down right
+			r = row + 1
+			c = col + 1
+			while r < @size && c < @size && @board[r][c] != EMPTY && @board[r][c] != disc do 
+					r += 1
+					c += 1
+			end 
+
+			if r < @size && c < @size && @board[r][c] == disc
+				i = row + 1
+				j = col + 1
+				while i < r &&  j < c
+					if @board[i+1][j+1] == disc
+						return true
+					end 
+					i += 1
+					j += 1
+				end 
+			end 
 
     # DO NOT DELETE THE LINE BELOW
 		return false	# if control reaches this point, then it's not a valid move
@@ -130,8 +247,140 @@ class Othello
 
     #
     # TO DO: add your code below
-    #
+		#
+		@board[row][col] = @disc;
+		# flips any opponent discs down
+		r = row + 1
+		c = col
+		while r < @size && @board[r][c] != EMPTY && @board[r][c] != @disc do
+				r += 1
+		end
 
+		if (r < @size && @board[r][c] == @disc) 
+			i = row + 1
+			while i < r 
+				@board[i][col] = @disc
+				i += 1
+			end
+		end
+
+		# flips any opponent discs up
+		r = row - 1
+		c = col
+
+		while r >= 0 && @board[r][c] != EMPTY && @board[r][c] != @disc do
+				r -= 1
+		end
+
+		if r >= 0 && @board[r][c] == @disc 
+			i = row - 1
+			while i > r 
+				@board[i][col] = @disc
+				i -= 1
+			end
+		end
+
+		# flips any opponent discs right
+		r = row
+		c = col + 1
+		while c < @size && @board[r][c] != EMPTY && @board[r][c] != @disc do
+				c += 1
+		end
+
+		if c < @size && @board[r][c] == @disc
+			j = col + 1
+			while j < c
+					@board[row][j] = @disc
+					j += 1
+			end
+		end 
+
+		# flips any opponent discs left
+		r = row
+		c = col - 1
+		while c >= 0 && @board[r][c] != EMPTY && @board[r][c] != @disc do
+				c -= 1
+		end
+
+		if c >= 0 && @board[r][c] == @disc 
+			j = col - 1
+			while j > c
+				@board[row][j] = @disc
+				j -= 1
+			end
+		end 
+
+		# flips any opponent discs diagonal up right
+		r = row - 1
+		c = col + 1
+		while r >= 0 && c < @size && @board[r][c] != EMPTY && @board[r][c] != @disc do
+				r -= 1
+				c += 1		
+		end 
+
+		if r >= 0 && c < @size && @board[r][c] == @disc
+				i = row - 1
+				j = col + 1
+				while i > r && j < c 
+					@board[i][j] = @disc
+					i -= 1
+					j += 1
+				end 
+		end
+
+		# flips any opponent discs diagonal up left
+		r = row - 1
+		c = col - 1
+		while r >= 0 && c >= 0 && @board[r][c] != EMPTY && @board[r][c] != @disc do 
+				r -= 1
+				c -= 1
+		end 
+
+		if r >= 0 && c >= 0 && @board[r][c] == @disc
+			i = row - 1
+			j = col - 1
+			while i > r && j > c
+						@board[i][j] = @disc
+						i -= 1
+						j -= 1
+			end 
+		end 
+
+		# flips any opponent discs diagonal down left (southwest)
+		r = row + 1
+		c = col - 1
+		while r < @size && c >= 0 && @board[r][c] != EMPTY && @board[r][c] != @disc do 
+				r += 1
+				c -= 1
+		end 
+
+		if r < @size && c >= 0 && @board[r][c] == @disc
+			i = row + 1
+			j = col - 1
+			while i < r && j > c 
+					@board[i][j] = @disc
+					i += 1
+					j -= 1
+			end
+		end
+
+		 # flips any opponent discs diagonal down right
+		 r = row + 1
+		 c = col + 1
+		 while r < @size && c < @size && @board[r][c] != EMPTY && @board[r][c] != @disc do 
+				 r += 1
+				 c += 1
+		 end 
+
+		 if r < @size && c < @size && @board[r][c] == @disc
+			i = row + 1
+			j = col + 1
+			while i < r && j < c
+				@board[i][j] = @disc
+				i += 1
+				j += 1
+			end 
+		end 
 
     # DO NOT DELETE THE CODE BELOW
 		if (!isGameOver())
